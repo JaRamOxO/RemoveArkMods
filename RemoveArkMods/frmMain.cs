@@ -20,7 +20,7 @@ namespace RemoveArkMods
             InitializeComponent();
             if (IsUserAdministrator())
             {
-                Text = @"Delete ARK mod (Administrator)";
+                Text = @"Remove ARK mod (Administrator)";
             }
         }
 

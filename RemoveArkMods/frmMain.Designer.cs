@@ -138,7 +138,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmMain";
-            this.Text = "Delete ARK mod";
+            this.Text = "Remove ARK mod";
             this.ResumeLayout(false);
             this.PerformLayout();
 
