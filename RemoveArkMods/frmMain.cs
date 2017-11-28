@@ -63,17 +63,16 @@ namespace RemoveArkMods
         {
             DirectoryInfo di = new DirectoryInfo(_arkInstallDir);
             di.EnumerateDirectories();
-            if (di.Parent != null && di.Parent.ToString() == "common")
+            if (di.Parent != null && di.Parent.ToString().ToLower() == "common")
             {
-                if (di.Parent.Parent != null && di.Parent.Parent.ToString() == "steamapps")
+                if (di.Parent.Parent != null && di.Parent.Parent.ToString().ToLower() == "steamapps")
                 {
                     _isValidArkDir = true;
                     btnDeleteMod.Enabled = IsAllValid();
                     SetInformation(!IsAllValid());
                 }
                 else _isValidArkDir = false;
-            }
-            return _isValidArkDir;
+            }return _isValidArkDir;
         }
 
         private bool IsAllValid()
