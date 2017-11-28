@@ -51,9 +51,10 @@ namespace RemoveArkMods
             {
                 _arkInstallDir = fbdArkInstallDir.SelectedPath;
                 lblArkInstallDir.Text = _arkInstallDir;
+                
                 if (!IsArkDirCorrect())
                 {
-                    MessageBox.Show(this, @"Choosen ARK install directory is not correct!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(this, @"Chosen ARK install directory is not correct!", @"Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 
             }
@@ -67,6 +68,16 @@ namespace RemoveArkMods
             {
                 if (di.Parent.Parent != null && di.Parent.Parent.ToString().ToLower() == "steamapps")
                 {
+                    DirectoryInfo diMods = new DirectoryInfo(_arkInstallDir + "\\ShooterGame\\Content\\Mods");
+                    lstModDir.Items.Clear();
+                    foreach (var folder in diMods.GetDirectories())
+                    {
+                        // not include DLC's
+                        if (folder.Name != "111111111" && folder.Name != "TheCenter" && folder.Name != "Ragnarok")
+                        {
+                            lstModDir.Items.Add(folder);
+                        }
+                    }
                     _isValidArkDir = true;
                     btnDeleteMod.Enabled = IsAllValid();
                     SetInformation(!IsAllValid());
@@ -165,6 +176,14 @@ namespace RemoveArkMods
                 MessageBox.Show($"{ex.Message}\n\n{ex.InnerException}");
             }
             
+        }
+
+        private void lstModDir_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lstModDir.SelectedIndex != -1)
+            {
+                txtModId.Text = lstModDir.SelectedItem.ToString();
+            }
         }
     }
 }
